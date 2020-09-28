@@ -1,0 +1,6 @@
+framework module Pods_DotaHeroApps {
+  umbrella header "Pods-DotaHeroApps-umbrella.h"
+
+  export *
+  module * { export * }
+}
