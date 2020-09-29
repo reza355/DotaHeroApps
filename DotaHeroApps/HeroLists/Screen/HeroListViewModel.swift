@@ -19,10 +19,12 @@ internal final class HeroListViewModel {
     internal struct Input {
         let didLoadTrigger: Driver<Void>
         let selectedRolesTrigger: Driver<HeroRole>
+        let selectedHeroTrigger: Driver<Hero>
     }
     
     internal struct Output {
         let heroList: Driver<[Hero]>
+        let toHeroDetail: Driver<(Hero, [String])>
     }
     
     init() {
@@ -75,6 +77,8 @@ internal final class HeroListViewModel {
                         heroRealmModel.maxAttack = hero.maxAttack
                         heroRealmModel.icon = hero.icon
                         heroRealmModel.image = hero.image
+                        heroRealmModel.mana = hero.mana
+                        heroRealmModel.speed = hero.speed
 
                         return heroRealmModel
                     }
@@ -109,7 +113,45 @@ internal final class HeroListViewModel {
             
         let heroList = Driver.merge(firstLoadData, saveToRealm, filteredHero)
         
-        return Output(heroList: heroList.asDriver())
+        let toHeroDetail = input.selectedHeroTrigger
+            .withLatestFrom(heroList) { (selectedHero: Hero, heroList: [Hero]) -> (Hero, [String]) in
+                
+                let selectedHeroAttribute = selectedHero.primaryAttribute
+                
+                let heroAttribute = heroList
+                    .filter { (hero) -> Bool in
+                        return hero.primaryAttribute == selectedHeroAttribute && hero.heroName != selectedHero.heroName
+                    }
+                
+                var sortedHero: [Hero] = []
+                
+                if selectedHeroAttribute == "int" {
+                    sortedHero = heroAttribute.sorted { (hero1, hero2) -> Bool in
+                        return hero1.mana > hero2.mana
+                    }
+                } else if selectedHeroAttribute == "agi" {
+                    sortedHero = heroAttribute.sorted { (hero1, hero2) -> Bool in
+                        return hero1.speed > hero2.speed
+                    }
+                } else if selectedHeroAttribute == "str" {
+                    sortedHero = heroAttribute.sorted { (hero1, hero2) -> Bool in
+                        return hero1.str > hero2.str
+                    }
+                }
+                
+                let arraySlice = sortedHero[0..<3]
+                let newArray = Array(arraySlice)
+                
+                let topThreeHeroImage = newArray
+                    .map({ (hero: Hero) -> String in
+                        return hero.image
+                    })
+                
+                return (selectedHero, topThreeHeroImage)
+            }
+            
+        
+        return Output(heroList: heroList.asDriver(), toHeroDetail: toHeroDetail.asDriver())
     }
 }
 

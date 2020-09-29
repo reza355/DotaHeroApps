@@ -19,6 +19,7 @@ internal final class HeroListViewController: UIViewController {
     private let disposeBag: DisposeBag = DisposeBag()
     
     private let selectedRoleSubject = PublishSubject<HeroRole>()
+    private let selectedHeroSubject = PublishSubject<Hero>()
     
     private let roles = [
         HeroRole.all,
@@ -51,6 +52,8 @@ internal final class HeroListViewController: UIViewController {
     internal override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "Dota Hero Guide"
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "HeroCharacterCell", bundle: nil), forCellWithReuseIdentifier: "HeroCharacterCell")
@@ -63,7 +66,8 @@ internal final class HeroListViewController: UIViewController {
     
         let input = HeroListViewModel.Input(
             didLoadTrigger: Driver.just(()),
-            selectedRolesTrigger: selectedRoleSubject.asDriver(onErrorDriveWith: .empty())
+            selectedRolesTrigger: selectedRoleSubject.asDriver(onErrorDriveWith: .empty()),
+            selectedHeroTrigger: selectedHeroSubject.asDriver(onErrorDriveWith: .empty())
         )
         
         let output = viewModel.transform(input: input)
@@ -72,6 +76,14 @@ internal final class HeroListViewController: UIViewController {
             .drive(onNext: { [weak self] (response) in
                 self?.heroList = response
                 self?.collectionView.reloadData()
+            })
+            .disposed(by: disposeBag)
+        
+        output.toHeroDetail
+            .drive(onNext: { (hero, heroImage) in
+                
+                let viewController = HeroDetailViewController(nibName: nil, bundle: nil, hero: hero, similarLink: heroImage)
+                self.navigationController?.pushViewController(viewController, animated: true)
             })
             .disposed(by: disposeBag)
     }
@@ -126,6 +138,9 @@ extension HeroListViewController: UICollectionViewDelegate, UICollectionViewData
         if indexPath.section == 0 {
             let selectedItem = roles[indexPath.row]
             self.selectedRoleSubject.onNext(selectedItem)
+        } else {
+            let selectedHero = heroList[indexPath.row]
+            self.selectedHeroSubject.onNext(selectedHero)
         }
     }
 }

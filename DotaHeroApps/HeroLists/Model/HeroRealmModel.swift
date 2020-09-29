@@ -21,6 +21,8 @@ internal class Hero: Object {
     @objc dynamic var baseHealth: Int = 0
     @objc dynamic var icon: String = ""
     @objc dynamic var image: String = ""
+    @objc dynamic var mana: Int = 0
+    @objc dynamic var speed: Int = 0
     var roles = List<String>()
 }
 

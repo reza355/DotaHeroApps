@@ -19,7 +19,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene else { return }
         NFX.sharedInstance().start()
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = HeroListViewController(nibName: nil, bundle: nil)
+        let nav = UINavigationController()
+        let vc = HeroListViewController(nibName: nil, bundle: nil)
+        nav.pushViewController(vc, animated: false)
+        window?.rootViewController = nav
         window?.makeKeyAndVisible()
     }
 

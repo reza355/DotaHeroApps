@@ -46,6 +46,8 @@ internal struct HeroListResponse: Decodable {
     let baseHealth: Int
     let icon: String
     let image: String
+    let mana: Int
+    let speed: Int
     
     private enum CodingKeys : String, CodingKey {
         case id
@@ -60,5 +62,7 @@ internal struct HeroListResponse: Decodable {
         case baseHealth = "base_health"
         case icon = "icon"
         case image = "img"
+        case mana = "base_mana"
+        case speed = "move_speed"
     }
 }
