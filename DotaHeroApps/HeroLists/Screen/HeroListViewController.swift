@@ -19,6 +19,16 @@ internal final class HeroListViewController: UIViewController {
     private let disposeBag: DisposeBag = DisposeBag()
     
     private var heroList = [Hero]()
+    private var roles = [
+        HeroRole.carry,
+        HeroRole.disabler,
+        HeroRole.durable,
+        HeroRole.escape,
+        HeroRole.initiator,
+        HeroRole.jungler,
+        HeroRole.nuker,
+        HeroRole.pusher
+    ]
     
     internal override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)   {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -40,6 +50,7 @@ internal final class HeroListViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "HeroCharacterCell", bundle: nil), forCellWithReuseIdentifier: "HeroCharacterCell")
+        collectionView.register(UINib(nibName: "RolesSelectionCell", bundle: nil), forCellWithReuseIdentifier: "RolesSelectionCell")
 
         bindViewModel()
     }
@@ -62,24 +73,44 @@ internal final class HeroListViewController: UIViewController {
 extension HeroListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     internal func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return 2
     }
 
     internal func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return heroList.count
+        
+        if section == 0 {
+            return roles.count
+        } else {
+            return heroList.count
+        }
     }
 
     internal func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HeroCharacterCell", for: indexPath) as? HeroCharacterCell else { return UICollectionViewCell() }
+        if indexPath.section == 0 {
+            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RolesSelectionCell", for: indexPath) as? RolesSelectionCell else { return UICollectionViewCell() }
 
-        let hero = self.heroList[indexPath.row]
-        cell.setupView(hero: hero)
+            let roles = self.roles[indexPath.row]
+            cell.setupText(text: roles.rawValue)
 
-        return cell
+            return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HeroCharacterCell", for: indexPath) as? HeroCharacterCell else { return UICollectionViewCell() }
+
+            let hero = self.heroList[indexPath.row]
+            cell.setupView(hero: hero)
+
+            return cell
+        }
     }
 
     internal func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 100)
+        
+        if indexPath.section == 0 {
+            return CGSize(width: 100, height: 30)
+        } else {
+            return CGSize(width: 100, height: 100)
+        }
     }
 }
