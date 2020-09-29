@@ -31,14 +31,18 @@ public extension MoyaProvider {
         }
 
         if trackInflights {
+            lock.lock()
             var inflightCompletionBlocks = self.inflightRequests[endpoint]
             inflightCompletionBlocks?.append(pluginsWithCompletion)
-            self.internalInflightRequests[endpoint] = inflightCompletionBlocks
+            self.inflightRequests[endpoint] = inflightCompletionBlocks
+            lock.unlock()
 
             if inflightCompletionBlocks != nil {
                 return cancellableToken
             } else {
-                self.internalInflightRequests[endpoint] = [pluginsWithCompletion]
+                lock.lock()
+                self.inflightRequests[endpoint] = [pluginsWithCompletion]
+                lock.unlock()
             }
         }
 
@@ -61,7 +65,10 @@ public extension MoyaProvider {
             let networkCompletion: Moya.Completion = { result in
               if self.trackInflights {
                 self.inflightRequests[endpoint]?.forEach { $0(result) }
-                self.internalInflightRequests.removeValue(forKey: endpoint)
+
+                self.lock.lock()
+                self.inflightRequests.removeValue(forKey: endpoint)
+                self.lock.unlock()
               } else {
                 pluginsWithCompletion(result)
               }
@@ -160,7 +167,7 @@ private extension MoyaProvider {
     private func interceptor(target: Target) -> MoyaRequestInterceptor {
         return MoyaRequestInterceptor(prepare: { [weak self] urlRequest in
             return self?.plugins.reduce(urlRequest) { $1.prepare($0, target: target) } ?? urlRequest
-       })
+        })
     }
 
     private func setup(interceptor: MoyaRequestInterceptor, with target: Target, and request: Request) {

@@ -28,5 +28,7 @@ public protocol TargetType {
 public extension TargetType {
 
     /// The type of validation to perform on the request. Default is `.none`.
-    var validationType: ValidationType { .none }
+    var validationType: ValidationType {
+        return .none
+    }
 }

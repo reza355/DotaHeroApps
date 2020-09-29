@@ -7,16 +7,23 @@
 //
 
 import UIKit
+import netfox
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let bounds = UIScreen.main.bounds
-        let window = UIWindow(frame: bounds)
-        window.rootViewController = HeroListViewController()
-        window.makeKeyAndVisible()
+        NFX.sharedInstance().start()
+        
+        if #available(iOS 13, *) {
+            // do nothing in AppDelegate
+        } else {
+            let bounds = UIScreen.main.bounds
+            let window = UIWindow(frame: bounds)
+            window.rootViewController = HeroListViewController(nibName: nil, bundle: nil)
+            window.makeKeyAndVisible()
+        }
 
         return true
     }

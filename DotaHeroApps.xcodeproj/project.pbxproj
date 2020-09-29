@@ -17,6 +17,9 @@
 		E56B0DA025223EB50085A85E /* HeroListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56B0D9E25223EB50085A85E /* HeroListViewController.swift */; };
 		E56B0DA125223EB50085A85E /* HeroListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E56B0D9F25223EB50085A85E /* HeroListViewController.xib */; };
 		E56B0DA6252241CE0085A85E /* HeroListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56B0DA5252241CE0085A85E /* HeroListViewModel.swift */; };
+		E56B0DA8252243BA0085A85E /* HeroListMoyaTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56B0DA7252243BA0085A85E /* HeroListMoyaTarget.swift */; };
+		E56B0DAA2522477C0085A85E /* HeroListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56B0DA92522477C0085A85E /* HeroListUseCase.swift */; };
+		E56B0DAD2522498B0085A85E /* HeroListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56B0DAC2522498B0085A85E /* HeroListResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 		E56B0D9E25223EB50085A85E /* HeroListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroListViewController.swift; sourceTree = "<group>"; };
 		E56B0D9F25223EB50085A85E /* HeroListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeroListViewController.xib; sourceTree = "<group>"; };
 		E56B0DA5252241CE0085A85E /* HeroListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroListViewModel.swift; sourceTree = "<group>"; };
+		E56B0DA7252243BA0085A85E /* HeroListMoyaTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroListMoyaTarget.swift; sourceTree = "<group>"; };
+		E56B0DA92522477C0085A85E /* HeroListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroListUseCase.swift; sourceTree = "<group>"; };
+		E56B0DAC2522498B0085A85E /* HeroListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroListResponse.swift; sourceTree = "<group>"; };
 		FB271FE825D71B515515C2C4 /* Pods-DotaHeroAppsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DotaHeroAppsTests.debug.xcconfig"; path = "Target Support Files/Pods-DotaHeroAppsTests/Pods-DotaHeroAppsTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -135,6 +141,7 @@
 		E56B0D9C25223E1F0085A85E /* HeroLists */ = {
 			isa = PBXGroup;
 			children = (
+				E56B0DAB252248FE0085A85E /* Model */,
 				E56B0DA2252241380085A85E /* Network */,
 				E56B0D9D25223E430085A85E /* Screen */,
 			);
@@ -154,8 +161,18 @@
 		E56B0DA2252241380085A85E /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				E56B0DA7252243BA0085A85E /* HeroListMoyaTarget.swift */,
+				E56B0DA92522477C0085A85E /* HeroListUseCase.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		E56B0DAB252248FE0085A85E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E56B0DAC2522498B0085A85E /* HeroListResponse.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,8 +343,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E56B0DAA2522477C0085A85E /* HeroListUseCase.swift in Sources */,
 				E56B0DA025223EB50085A85E /* HeroListViewController.swift in Sources */,
+				E56B0DAD2522498B0085A85E /* HeroListResponse.swift in Sources */,
 				E5506BA8252238EE00515D6D /* AppDelegate.swift in Sources */,
+				E56B0DA8252243BA0085A85E /* HeroListMoyaTarget.swift in Sources */,
 				E5506BAA252238EE00515D6D /* SceneDelegate.swift in Sources */,
 				E56B0DA6252241CE0085A85E /* HeroListViewModel.swift in Sources */,
 			);

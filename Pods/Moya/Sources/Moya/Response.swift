@@ -24,14 +24,16 @@ public final class Response: CustomDebugStringConvertible, Equatable {
 
     /// A text description of the `Response`.
     public var description: String {
-        "Status Code: \(statusCode), Data Length: \(data.count)"
+        return "Status Code: \(statusCode), Data Length: \(data.count)"
     }
 
     /// A text description of the `Response`. Suitable for debugging.
-    public var debugDescription: String { description }
+    public var debugDescription: String {
+        return description
+    }
 
     public static func == (lhs: Response, rhs: Response) -> Bool {
-        lhs.statusCode == rhs.statusCode
+        return lhs.statusCode == rhs.statusCode
             && lhs.data == rhs.data
             && lhs.response == rhs.response
     }
@@ -61,7 +63,7 @@ public extension Response {
      - throws: `MoyaError.statusCode` when others are encountered.
     */
     func filter(statusCode: Int) throws -> Response {
-        try filter(statusCodes: statusCode...statusCode)
+        return try filter(statusCodes: statusCode...statusCode)
     }
 
     /**
@@ -70,7 +72,7 @@ public extension Response {
      - throws: `MoyaError.statusCode` when others are encountered.
     */
     func filterSuccessfulStatusCodes() throws -> Response {
-        try filter(statusCodes: 200...299)
+        return try filter(statusCodes: 200...299)
     }
 
     /**
@@ -79,7 +81,7 @@ public extension Response {
      - throws: `MoyaError.statusCode` when others are encountered.
     */
     func filterSuccessfulStatusAndRedirectCodes() throws -> Response {
-        try filter(statusCodes: 200...399)
+        return try filter(statusCodes: 200...399)
     }
 
     /// Maps data received from the signal into an Image.

@@ -7,8 +7,9 @@ target 'DotaHeroApps' do
 
   pod 'RxSwift', '~> 5.1'
   pod 'RxCocoa', '~> 5.1'
-  pod 'Moya', '15.0.0-alpha.1'
+  pod 'Moya/RxSwift', '~> 14.0'
   pod 'RealmSwift', '10.0.0-beta.5'
+  pod 'netfox'
 
   target 'DotaHeroAppsTests' do
     inherit! :search_paths
