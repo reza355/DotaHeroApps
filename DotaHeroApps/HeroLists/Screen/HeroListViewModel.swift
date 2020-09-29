@@ -13,7 +13,7 @@ import RealmSwift
 
 internal final class HeroListViewModel {
     
-    private var useCase: HeroListUseCase = HeroListUseCase()
+    private var useCase: HeroListUseCaseProtocol
     private var realm: Realm?
     
     internal struct Input {
@@ -27,7 +27,10 @@ internal final class HeroListViewModel {
         let toHeroDetail: Driver<(Hero, [String])>
     }
     
-    init() {
+    init(useCase: HeroListUseCaseProtocol) {
+        
+        self.useCase = useCase
+        
         do {
             self.realm = try Realm()
         } catch let error as NSError {
