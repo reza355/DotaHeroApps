@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import Kingfisher
 
-class HeroCharacterCell: UICollectionViewCell {
+internal class HeroCharacterCell: UICollectionViewCell {
+    
+    @IBOutlet private weak var heroImages: UIImageView!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    internal func setupView(hero: Hero) {
+        let url = URL(string: "https://api.opendota.com\(hero.image)")
+        self.heroImages.kf.setImage(with: url)
     }
-
 }

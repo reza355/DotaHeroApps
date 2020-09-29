@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HeroListViewController" customModule="DotaHeroApps" customModuleProvider="target">
             <connections>
+                <outlet property="collectionView" destination="6cR-Ww-ZTD" id="cVh-pC-0c7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,7 +19,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="6cR-Ww-ZTD">
-                    <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                    <rect key="frame" x="8" y="44" width="406" height="852"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VBk-8h-dwk">
                         <size key="itemSize" width="128" height="128"/>
@@ -30,7 +31,7 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="6cR-Ww-ZTD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="0Lu-rR-vjF"/>
+                <constraint firstItem="6cR-Ww-ZTD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="0Lu-rR-vjF"/>
                 <constraint firstItem="6cR-Ww-ZTD" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="2ib-DI-Dn0"/>
                 <constraint firstItem="6cR-Ww-ZTD" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="dnP-19-oLJ"/>
                 <constraint firstAttribute="bottom" secondItem="6cR-Ww-ZTD" secondAttribute="bottom" id="lGM-QE-GSh"/>

@@ -37,13 +37,14 @@ internal struct HeroListResponse: Decodable {
     let heroName: String
     let primaryAttribute: PrimaryAttribute
     let attackType: HeroType
-    let roles: [HeroRole]
+    let roles: [String]
     let str: Int
     let agi: Int
     let int: Int
     let maxAttack: Int
     let baseHealth: Int
-    let icon: String    
+    let icon: String
+    let image: String
     
     private enum CodingKeys : String, CodingKey {
         case id
@@ -57,5 +58,6 @@ internal struct HeroListResponse: Decodable {
         case maxAttack = "base_attack_max"
         case baseHealth = "base_health"
         case icon = "icon"
+        case image = "img"
     }
 }

@@ -18,21 +18,29 @@ internal final class HeroListViewController: UIViewController {
     private let viewModel: HeroListViewModel = HeroListViewModel()
     private let disposeBag: DisposeBag = DisposeBag()
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)   {
+    private var heroList = [Hero]()
+    
+    internal override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)   {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    internal required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    }
     
-    override func viewDidLoad() {
+    
+    internal override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        
+        collectionView.register(UINib(nibName: "HeroCharacterCell", bundle: nil), forCellWithReuseIdentifier: "HeroCharacterCell")
+
         bindViewModel()
     }
     
@@ -43,27 +51,35 @@ internal final class HeroListViewController: UIViewController {
         let output = viewModel.transform(input: input)
         
         output.heroList
-            .drive(onNext: { (response) in
-                print(response)
-            }).disposed(by: disposeBag)
+            .drive(onNext: { [weak self] (response) in
+                self?.heroList = response
+                self?.collectionView.reloadData()
+            })
+            .disposed(by: disposeBag)
     }
 }
 
 extension HeroListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+
+    internal func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+
+    internal func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return heroList.count
     }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+
+    internal func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HeroCharacterCell", for: indexPath) as? HeroCharacterCell else { return UICollectionViewCell() }
+
+        let hero = self.heroList[indexPath.row]
+        cell.setupView(hero: hero)
+
+        return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+    internal func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 100, height: 100)
     }
 }
