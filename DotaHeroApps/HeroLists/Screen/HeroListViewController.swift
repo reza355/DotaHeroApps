@@ -15,7 +15,7 @@ internal final class HeroListViewController: UIViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView!
     
-    private let viewModel: HeroListViewModel = HeroListViewModel()
+    private var viewModel: HeroListViewModel?
     private let disposeBag: DisposeBag = DisposeBag()
     
     private let selectedRoleSubject = PublishSubject<HeroRole>()
@@ -37,6 +37,9 @@ internal final class HeroListViewController: UIViewController {
     
     internal override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)   {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        let useCase = HeroListUseCase()
+        self.viewModel = HeroListViewModel(useCase: useCase)
     }
 
     internal required init?(coder aDecoder: NSCoder) {
@@ -63,6 +66,8 @@ internal final class HeroListViewController: UIViewController {
     }
     
     private func bindViewModel() {
+        
+        guard let viewModel = self.viewModel else { return }
     
         let input = HeroListViewModel.Input(
             didLoadTrigger: Driver.just(()),
@@ -84,6 +89,14 @@ internal final class HeroListViewController: UIViewController {
                 
                 let viewController = HeroDetailViewController(nibName: nil, bundle: nil, hero: hero, similarLink: heroImage)
                 self.navigationController?.pushViewController(viewController, animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        output.error
+            .drive(onNext: { [weak self] errorMessage in
+                let alert = UIAlertController(title: "Network Error", message: errorMessage, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self?.present(alert, animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
     }
