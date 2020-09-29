@@ -18,8 +18,10 @@ internal final class HeroListViewController: UIViewController {
     private let viewModel: HeroListViewModel = HeroListViewModel()
     private let disposeBag: DisposeBag = DisposeBag()
     
-    private var heroList = [Hero]()
-    private var roles = [
+    private let selectedRoleSubject = PublishSubject<HeroRole>()
+    
+    private let roles = [
+        HeroRole.all,
         HeroRole.carry,
         HeroRole.disabler,
         HeroRole.durable,
@@ -29,6 +31,8 @@ internal final class HeroListViewController: UIViewController {
         HeroRole.nuker,
         HeroRole.pusher
     ]
+    
+    private var heroList = [Hero]()
     
     internal override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)   {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -57,7 +61,10 @@ internal final class HeroListViewController: UIViewController {
     
     private func bindViewModel() {
     
-        let input = HeroListViewModel.Input(didLoadTrigger: Driver.just(()))
+        let input = HeroListViewModel.Input(
+            didLoadTrigger: Driver.just(()),
+            selectedRolesTrigger: selectedRoleSubject.asDriver(onErrorDriveWith: .empty())
+        )
         
         let output = viewModel.transform(input: input)
         
@@ -111,6 +118,14 @@ extension HeroListViewController: UICollectionViewDelegate, UICollectionViewData
             return CGSize(width: 100, height: 30)
         } else {
             return CGSize(width: 100, height: 100)
+        }
+    }
+    
+    internal func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if indexPath.section == 0 {
+            let selectedItem = roles[indexPath.row]
+            self.selectedRoleSubject.onNext(selectedItem)
         }
     }
 }

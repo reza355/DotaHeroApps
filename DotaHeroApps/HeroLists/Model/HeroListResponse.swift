@@ -9,6 +9,7 @@
 import Foundation
 
 internal enum HeroRole: String, Decodable {
+    case all = "All Hero"
     case carry = "Carry"
     case escape = "Escape"
     case nuker = "Nuker"

@@ -18,6 +18,7 @@ internal final class HeroListViewModel {
     
     internal struct Input {
         let didLoadTrigger: Driver<Void>
+        let selectedRolesTrigger: Driver<HeroRole>
     }
     
     internal struct Output {
@@ -90,7 +91,23 @@ internal final class HeroListViewModel {
                 return realmModel
             }
         
-        let heroList = Driver.merge(firstLoadData, saveToRealm)
+        let filteredHero = Driver.combineLatest(
+                input.selectedRolesTrigger, Driver.merge(firstLoadData, saveToRealm)
+            )
+            .map { (role: HeroRole, heroList: [Hero]) -> [Hero] in
+                
+                guard role != .all else { return heroList }
+                
+                return heroList.filter { (hero) -> Bool in
+                    for heroRole in hero.roles where heroRole == role.rawValue {
+                        return true
+                    }
+                    
+                    return false
+                }
+            }
+            
+        let heroList = Driver.merge(firstLoadData, saveToRealm, filteredHero)
         
         return Output(heroList: heroList.asDriver())
     }

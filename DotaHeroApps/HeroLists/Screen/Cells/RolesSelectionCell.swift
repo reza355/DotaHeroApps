@@ -10,10 +10,10 @@ import UIKit
 
 internal class RolesSelectionCell: UICollectionViewCell {
     
-    @IBOutlet private weak var rolesButton: UIButton!
+    @IBOutlet private weak var rolesTextLabel: UILabel!
 
     internal func setupText(text: String) {
-        rolesButton.setTitle(text, for: .normal)
+        rolesTextLabel.text = text
     }
 
 }

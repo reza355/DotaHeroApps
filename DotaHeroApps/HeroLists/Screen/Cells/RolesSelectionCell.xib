@@ -19,21 +19,17 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G9V-wS-ihy">
                         <rect key="frame" x="0.0" y="0.0" width="171" height="53"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3gj-qA-XRd">
-                                <rect key="frame" x="0.0" y="0.0" width="171" height="53"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lzi-Gc-YYw">
+                                <rect key="frame" x="64.5" y="16" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="3gj-qA-XRd" secondAttribute="bottom" id="7wG-qu-bwg"/>
-                            <constraint firstAttribute="trailing" secondItem="3gj-qA-XRd" secondAttribute="trailing" id="NS4-kq-Z7k"/>
-                            <constraint firstItem="3gj-qA-XRd" firstAttribute="centerY" secondItem="G9V-wS-ihy" secondAttribute="centerY" id="NcL-CV-PEJ"/>
-                            <constraint firstItem="3gj-qA-XRd" firstAttribute="top" secondItem="G9V-wS-ihy" secondAttribute="top" id="qqr-da-J6D"/>
-                            <constraint firstItem="3gj-qA-XRd" firstAttribute="centerX" secondItem="G9V-wS-ihy" secondAttribute="centerX" id="swr-ia-WtB"/>
-                            <constraint firstItem="3gj-qA-XRd" firstAttribute="leading" secondItem="G9V-wS-ihy" secondAttribute="leading" id="yx9-j8-VVx"/>
+                            <constraint firstItem="Lzi-Gc-YYw" firstAttribute="centerX" secondItem="G9V-wS-ihy" secondAttribute="centerX" id="UMa-66-Nb9"/>
+                            <constraint firstItem="Lzi-Gc-YYw" firstAttribute="centerY" secondItem="G9V-wS-ihy" secondAttribute="centerY" id="jax-NM-XPp"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -47,7 +43,7 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="171" height="53"/>
             <connections>
-                <outlet property="rolesButton" destination="3gj-qA-XRd" id="Tkl-90-hff"/>
+                <outlet property="rolesTextLabel" destination="Lzi-Gc-YYw" id="D5j-59-UXN"/>
             </connections>
             <point key="canvasLocation" x="-104" y="138"/>
         </collectionViewCell>
