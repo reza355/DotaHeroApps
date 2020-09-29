@@ -26,10 +26,6 @@ class DotaHeroAppsTests: XCTestCase {
         self.useCase = nil
         self.viewModel = nil
     }
-        
-    
-    
-
 }
 
 internal class HeroListUseCaseMock: HeroListUseCaseProtocol {
