@@ -25,6 +25,7 @@ internal final class HeroListViewModel {
     internal struct Output {
         let heroList: Driver<[Hero]>
         let toHeroDetail: Driver<(Hero, [String])>
+        let error: Driver<String>
     }
     
     init(useCase: HeroListUseCaseProtocol) {
@@ -39,6 +40,8 @@ internal final class HeroListViewModel {
     }
     
     internal func transform(input: HeroListViewModel.Input) -> HeroListViewModel.Output {
+        
+        let errorSubject = PublishSubject<String>()
         
         let firstLoadData = input.didLoadTrigger
             .map { [weak self] _ -> [Hero] in
@@ -56,8 +59,12 @@ internal final class HeroListViewModel {
             }
         
         let getHeroList = input.didLoadTrigger
-            .flatMapLatest { [useCase] _ -> Driver<[HeroListResponse]> in
+            .flatMapLatest { [useCase, errorSubject] _ -> Driver<[HeroListResponse]> in
                 return useCase.getHeroList()
+                    .catchError({ error in
+                        errorSubject.onNext(error.localizedDescription)
+                        return .empty()
+                    })
                     .asDriver(onErrorJustReturn: [])
             }
         
@@ -154,7 +161,11 @@ internal final class HeroListViewModel {
             }
             
         
-        return Output(heroList: heroList.asDriver(), toHeroDetail: toHeroDetail.asDriver())
+        return Output(
+            heroList: heroList.asDriver(),
+            toHeroDetail: toHeroDetail.asDriver(),
+            error: errorSubject.asDriver(onErrorDriveWith: .empty())
+        )
     }
 }
 
