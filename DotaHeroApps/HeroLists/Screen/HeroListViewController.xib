@@ -16,9 +16,27 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="6cR-Ww-ZTD">
+                    <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VBk-8h-dwk">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+            </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="6cR-Ww-ZTD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="0Lu-rR-vjF"/>
+                <constraint firstItem="6cR-Ww-ZTD" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="2ib-DI-Dn0"/>
+                <constraint firstItem="6cR-Ww-ZTD" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="dnP-19-oLJ"/>
+                <constraint firstAttribute="bottom" secondItem="6cR-Ww-ZTD" secondAttribute="bottom" id="lGM-QE-GSh"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="132" y="145"/>
+            <point key="canvasLocation" x="131.8840579710145" y="144.64285714285714"/>
         </view>
     </objects>
 </document>

@@ -10,6 +10,7 @@ target 'DotaHeroApps' do
   pod 'Moya/RxSwift', '~> 14.0'
   pod 'RealmSwift', '10.0.0-beta.5'
   pod 'netfox'
+  pod 'Kingfisher', '~> 5.15'
 
   target 'DotaHeroAppsTests' do
     inherit! :search_paths

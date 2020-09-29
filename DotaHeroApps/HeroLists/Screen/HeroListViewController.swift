@@ -13,10 +13,10 @@ import Moya
 
 internal final class HeroListViewController: UIViewController {
     
-    private var viewModel: HeroListViewModel = HeroListViewModel()
-    let userProvider = MoyaProvider<HeroListMoyaTarget>()
-
-    let disposeBag = DisposeBag()
+    @IBOutlet private weak var collectionView: UICollectionView!
+    
+    private let viewModel: HeroListViewModel = HeroListViewModel()
+    private let disposeBag: DisposeBag = DisposeBag()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)   {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -29,6 +29,9 @@ internal final class HeroListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
         bindViewModel()
     }
@@ -43,5 +46,24 @@ internal final class HeroListViewController: UIViewController {
             .drive(onNext: { (response) in
                 print(response)
             }).disposed(by: disposeBag)
+    }
+}
+
+extension HeroListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 100, height: 100)
     }
 }

@@ -20,6 +20,8 @@
 		E56B0DA8252243BA0085A85E /* HeroListMoyaTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56B0DA7252243BA0085A85E /* HeroListMoyaTarget.swift */; };
 		E56B0DAA2522477C0085A85E /* HeroListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56B0DA92522477C0085A85E /* HeroListUseCase.swift */; };
 		E56B0DAD2522498B0085A85E /* HeroListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56B0DAC2522498B0085A85E /* HeroListResponse.swift */; };
+		E56B0DB12522F6740085A85E /* HeroCharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56B0DAF2522F6740085A85E /* HeroCharacterCell.swift */; };
+		E56B0DB22522F6740085A85E /* HeroCharacterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E56B0DB02522F6740085A85E /* HeroCharacterCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		E56B0DA7252243BA0085A85E /* HeroListMoyaTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroListMoyaTarget.swift; sourceTree = "<group>"; };
 		E56B0DA92522477C0085A85E /* HeroListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroListUseCase.swift; sourceTree = "<group>"; };
 		E56B0DAC2522498B0085A85E /* HeroListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroListResponse.swift; sourceTree = "<group>"; };
+		E56B0DAF2522F6740085A85E /* HeroCharacterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroCharacterCell.swift; sourceTree = "<group>"; };
+		E56B0DB02522F6740085A85E /* HeroCharacterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeroCharacterCell.xib; sourceTree = "<group>"; };
 		FB271FE825D71B515515C2C4 /* Pods-DotaHeroAppsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DotaHeroAppsTests.debug.xcconfig"; path = "Target Support Files/Pods-DotaHeroAppsTests/Pods-DotaHeroAppsTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -151,6 +155,7 @@
 		E56B0D9D25223E430085A85E /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				E56B0DAE2522F4720085A85E /* Cells */,
 				E56B0D9E25223EB50085A85E /* HeroListViewController.swift */,
 				E56B0D9F25223EB50085A85E /* HeroListViewController.xib */,
 				E56B0DA5252241CE0085A85E /* HeroListViewModel.swift */,
@@ -173,6 +178,15 @@
 				E56B0DAC2522498B0085A85E /* HeroListResponse.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E56B0DAE2522F4720085A85E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E56B0DAF2522F6740085A85E /* HeroCharacterCell.swift */,
+				E56B0DB02522F6740085A85E /* HeroCharacterCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E56B0DA125223EB50085A85E /* HeroListViewController.xib in Resources */,
+				E56B0DB22522F6740085A85E /* HeroCharacterCell.xib in Resources */,
 				E5506BB4252238EF00515D6D /* LaunchScreen.storyboard in Resources */,
 				E5506BB1252238EF00515D6D /* Assets.xcassets in Resources */,
 			);
@@ -348,6 +363,7 @@
 				E56B0DAD2522498B0085A85E /* HeroListResponse.swift in Sources */,
 				E5506BA8252238EE00515D6D /* AppDelegate.swift in Sources */,
 				E56B0DA8252243BA0085A85E /* HeroListMoyaTarget.swift in Sources */,
+				E56B0DB12522F6740085A85E /* HeroCharacterCell.swift in Sources */,
 				E5506BAA252238EE00515D6D /* SceneDelegate.swift in Sources */,
 				E56B0DA6252241CE0085A85E /* HeroListViewModel.swift in Sources */,
 			);
